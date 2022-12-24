@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title></title>
+		<style>
+			* {
+				padding: 0;
+				margin: 0;
+				list-style: none;
+				transition: .4s;
+				box-sizing: border-box;
+				outline: none;
+			}
+
+			body {
+				width: 100vw;
+				height: 100vh;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
+
+			.box {
+				width: 400px;
+				background-color: #64a4c2;
+				height: 500px;
+			}
+
+			.val {
+				width: 100%;
+				height: 80px;
+				float: left;
+			}
+
+			.box ul {
+				float: left;
+				width: 100%;
+				height: 420px;
+				display: flex;
+				justify-content: space-between;
+				flex-wrap: wrap;
+				margin-top: 10px;
+			}
+
+			.box ul li {
+				width: 133px;
+				height: 50px;
+			}
+
+			.box ul li button {
+				width: 100%;
+				height: 50px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="box">
+			<input type="text" class="val" readonly>
+			<ul>
+				<li><button>1</button></li>
+				<li><button>2</button></li>
+				<li><button>3</button></li>
+				<li><button>4</button></li>
+				<li><button>5</button></li>
+				<li><button>6</button></li>
+				<li><button>7</button></li>
+				<li><button>8</button></li>
+				<li><button>9</button></li>
+				<li><button>0</button></li>
+				<li><button>+</button></li>
+				<li><button>-</button></li>
+				<li><button>*</button></li>
+				<li><button>/</button></li>
+				<li><button>=</button></li>
+			</ul>
+		</div>
+	</body>
+	<script>
+		var val = document.querySelector('.val')
+		var btns = document.querySelectorAll('button')
+		for (var i = 0; i < btns.length - 1; i++) {
+			btns[i].onclick = function() {
+				val.value += this.innerHTML
+			}
+		}
+		btns[btns.length - 1].onclick = function() {
+			if (val.value != '') {
+				val.value = eval(val.value)
+			} else {
+				val.placeholder = '内容不能为空'
+			}
+		}
+
+		function down(e, num, num1) {
+			if (e.keyCode === num) {
+				val.value += num1
+			}
+		}
+		document.documentElement.onkeydown = function(e) {
+			console.log(e.keyCode)
+			down(e, 96, 0)
+			down(e, 97, 1)
+			down(e, 98, 2)
+			down(e, 99, 3)
+			down(e, 100, 4)
+			down(e, 101, 5)
+			down(e, 102, 6)
+			down(e, 103, 7)
+			down(e, 104, 8)
+			down(e, 105, 9)
+			down(e, 106, '*')
+			down(e, 107, '+')
+			down(e, 109, '-')
+			down(e, 111, '/')
+			if (e.keyCode === 13) {
+				if (val.value != '') {
+					val.value = eval(val.value)
+				} else {
+					val.placeholder = '内容不能为空'
+				}
+			}
+			if (e.keyCode === 8) {
+				console.log(val.value.length)
+				val.slice(0,val.value.length)
+			}
+		}
+	</script>
+</html>
